@@ -7,7 +7,7 @@
 function set_default(executionContext, phoneNumberField) {
   
     //Write to console log for troubleshooting
-    console.log("Phone - set default v0.3");
+    console.log("Phone - set default v0.6");
     console.log(phoneNumberField);
 
     //get phone number attribute
@@ -35,7 +35,7 @@ function set_default(executionContext, phoneNumberField) {
 function format_phonenumber(executionContext) {
 
     //Write to console log for troubleshooting
-    console.log("Phone - format phone number v1.2");
+    console.log("Phone - format phone number v1.8");
     
     //get phone number attribute
     var formContext = executionContext.getFormContext();
@@ -56,20 +56,28 @@ function format_phonenumber(executionContext) {
     
     phoneControl.clearNotification();
     
-    var formattedPhoneNumber = formatPhoneNumber(phoneNumber.getValue(),phoneControl);
+    console.log(phoneNumber.getValue());
 
+    if (phoneNumber.getValue() != null) {
     
-    switch (formattedPhoneNumber) {
-        case 'cc':
-            phoneControl.setNotification("Invalid country code");
-            break;
-        case 'ln':
-            phoneControl.setNotification("Wrong number of digits for specific country code.");
-            break;
-        default:
-            phoneNumber.setValue(formattedPhoneNumber);
-            break;
+        var formattedPhoneNumber = formatPhoneNumber(phoneNumber.getValue(),phoneControl);  
+        switch (formattedPhoneNumber) {
+            case 'cc':
+                phoneControl.setNotification("Invalid country code");
+                break;
+            case 'ln':
+                phoneControl.setNotification("Wrong number of digits for specific country code.");
+                break;
+            default:
+                phoneNumber.setValue(formattedPhoneNumber);
+                break;
         }
+        
+    }
+    else
+    {
+        console.log("Phone number is blank.");
+    }
     
 }
 
