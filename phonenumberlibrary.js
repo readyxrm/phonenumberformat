@@ -1,6 +1,7 @@
 //Format Phone Number
 //ND - June 28, 2024
 //Script to format phone number into specific format
+//Last update: August 7, 2024
 
 //JavaScript function to set the default value
 function set_default(executionContext, phoneNumberField) {
@@ -34,7 +35,7 @@ function set_default(executionContext, phoneNumberField) {
 function format_phonenumber(executionContext) {
 
     //Write to console log for troubleshooting
-    console.log("Phone - format phone number v0.9");
+    console.log("Phone - format phone number v1.2");
     
     //get phone number attribute
     var formContext = executionContext.getFormContext();
@@ -320,8 +321,14 @@ function formatPhoneNumber(phoneNumber, phoneControl) {
 
     // Format the phone number
     let formattedPhoneNumber = prefix + " " + localNumber;
-
-    phoneControl.setNotification(country);
-
+    
+    //provide the user with information as to which country code has been set    
+    phoneControl.addNotification({
+        messages: [''+ country +''], 
+        notificationLevel: 'RECOMMENDATION',
+        uniqueID: 'phone_nofitication',
+        actions: null
+        });
+  
     return formattedPhoneNumber;
 }
